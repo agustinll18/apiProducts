@@ -29,8 +29,8 @@ app.get("/productos", (req, res) => {
   Prod.find({}).then(
     producto => {
       res.send(producto)/* cambie el res.json a res.send */
-      console.log(producto)
-      mongoose.connection.close();
+      console.log(producto)/* 
+      mongoose.connection.close(); */
     })
 })
 
@@ -51,8 +51,8 @@ app.get("/productos/:id", (req, res) => {
   /* CON MONGOOSE */
   Prod.find({_id:`${id}`}).then( 
     producto => {
-      res.json(producto)
-      mongoose.connection.close();
+      res.json(producto)/* 
+      mongoose.connection.close(); */
     })
     /* ESTO HACE QUE SI LA ID QUE SE ESCRIBIO EN LA URL EXISTE EN EL ARRAY DE PRODUCTOS MUESTRE EL CORRECTO */ 
 })
