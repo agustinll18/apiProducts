@@ -3,6 +3,7 @@ const express = require("express");
 const middelware = require("./components/middleware");
 const mongoose = require("mongoose");
 const cors = require("cors");   /* ESTO HACE QUE NUESTRA API PUEDA COMPARTIR SUS RECURSOS CON OTROS DOMINIO  */
+
 const Prod= require("./models/Products")
 
 /* CORS = CROSS ORIGIN RESOURCE SHARING */
@@ -20,6 +21,7 @@ app.listen(PORT, () => {
 }) 
 
 let productos = []
+
 app.get("/", (req, res) => {
   /* FIJARSE EL CONTENT TYPE EN GOOGLE */
   res.send("<h1>Hola desde Match Point</h1>")
@@ -28,9 +30,8 @@ app.get("/productos", (req, res) => {
   /* FIJARSE EL CONTENT TYPE EN GOOGLE */
   Prod.find({}).then(
     producto => {
-      res.send(producto)/* cambie el res.json a res.send */
-      console.log(producto)/* 
-      mongoose.connection.close(); */
+      res.json(producto)/* cambie el res.json a res.send */
+      console.log(producto)
     })
 })
 

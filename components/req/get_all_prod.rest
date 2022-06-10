@@ -1,1 +1,1 @@
-GET https://polar-basin-25728.herokuapp.com/productos
+GET http://localhost:3001/productos
