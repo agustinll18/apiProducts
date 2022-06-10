@@ -1,7 +1,9 @@
 require("./mongodb")
 const express = require("express");
 const middelware = require("./components/middleware");
+const mongoose = require("mongoose");
 const cors = require("cors");   /* ESTO HACE QUE NUESTRA API PUEDA COMPARTIR SUS RECURSOS CON OTROS DOMINIO  */
+
 const Prod= require("./models/Products")
 
 /* CORS = CROSS ORIGIN RESOURCE SHARING */
@@ -16,9 +18,10 @@ app.use(middelware)
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`listening on port: ${PORT}`)
-})
+}) 
 
 let productos = []
+
 app.get("/", (req, res) => {
   /* FIJARSE EL CONTENT TYPE EN GOOGLE */
   res.send("<h1>Hola desde Match Point</h1>")
@@ -26,9 +29,9 @@ app.get("/", (req, res) => {
 app.get("/productos", (req, res) => {
   /* FIJARSE EL CONTENT TYPE EN GOOGLE */
   Prod.find({}).then(
-    productos => {
-      res.json(productos)/* 
-      mongoose.connection.close(); */
+    producto => {
+      res.json(producto)/* cambie el res.json a res.send */
+      console.log(producto)
     })
 })
 
@@ -48,8 +51,9 @@ app.get("/productos/:id", (req, res) => {
 
   /* CON MONGOOSE */
   Prod.find({_id:`${id}`}).then( 
-    producto => { res.json(producto)/* 
-    mongoose.connection.close(); */
+    producto => {
+      res.json(producto)/* 
+      mongoose.connection.close(); */
     })
     /* ESTO HACE QUE SI LA ID QUE SE ESCRIBIO EN LA URL EXISTE EN EL ARRAY DE PRODUCTOS MUESTRE EL CORRECTO */ 
 })
